@@ -1,5 +1,5 @@
 # Microsserviços com RabbitMQ
-
+![CI](https://github.com/leonlimask20-dot/microservices/actions/workflows/ci.yml/badge.svg)
 Dois microsserviços Spring Boot independentes que se comunicam de forma assíncrona via RabbitMQ, totalmente containerizados com Docker Compose.
 
 ---
