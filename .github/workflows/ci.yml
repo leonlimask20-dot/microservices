@@ -1,0 +1,44 @@
+name: CI — Microsserviços
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  testes-order-service:
+    name: Testes Order Service
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Verificar estrutura
+        run: ls -la
+      - name: Executar testes
+        run: |
+          if [ -d "order-service" ]; then
+            cd order-service && mvn test -B -Dspring.profiles.active=test
+          else
+            mvn test -B -Dspring.profiles.active=test
+          fi
+
+  testes-notification-service:
+    name: Testes Notification Service
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Executar testes
+        run: |
+          if [ -d "notification-service" ]; then
+            cd notification-service && mvn test -B -Dspring.profiles.active=test
+          else
+            echo "notification-service nao encontrado como subpasta"
+          fi
